@@ -1,9 +1,11 @@
+// src/app.module.ts
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
 // Config's
 import { PgConfig, AppConfig } from '@/config'
 // modules
-import { PgModule } from '@/databases/pg.module'
+import { PgModule } from '@/databases/postgres/pg.module'
+import { DynamoDbModule } from '@/databases/dynamodb/dynamodb.module'
 import { CommonModule } from '@/common/common.module'
 import { UsersModule } from '@/modules/users/users.module'
 import { WhatsAppModule } from '@/modules/whatsapp/whatsapp.module'
@@ -19,6 +21,7 @@ import { UsersController } from '@/modules/users/users.controller'
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [AppConfig, PgConfig] }),
     PgModule,
+    DynamoDbModule,
     UsersModule,
     WhatsAppModule,
     AuthModule,

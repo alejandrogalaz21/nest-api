@@ -1,6 +1,8 @@
+// src/databases/postgres/pg.module.ts
 import { Module } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { PgHealthService } from './pg-health.service'
 
 @Module({
   imports: [
@@ -19,7 +21,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
       }),
       inject: [ConfigService]
     })
-  ]
+  ],
+  providers: [PgHealthService],
+  exports: [PgHealthService]
 })
 export class PgModule {
   constructor(private configService: ConfigService) {}

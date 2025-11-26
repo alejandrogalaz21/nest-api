@@ -1,3 +1,4 @@
+// src/config/app.configuration.ts
 import { registerAs } from '@nestjs/config'
 
 export default registerAs('app', () => ({
@@ -26,5 +27,15 @@ export default registerAs('app', () => ({
       'http://timi-webpage-2025.s3-website-us-west-2.amazonaws.com',
     signIn:
       'http://timi-webpage-2025.s3-website-us-west-2.amazonaws.com/auth/jwt/sign-in'
+  },
+  ddb: {
+    region: process.env.AWS_REGION,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    endpoint: process.env.AWS_DYNAMODB_ENDPOINT
+  },
+  redis: {
+    host: process.env.REDIS_HOST || 'localhost',
+    port: parseInt(process.env.REDIS_PORT) || 6379
   }
 }))

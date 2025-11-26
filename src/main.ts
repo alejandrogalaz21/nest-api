@@ -3,8 +3,10 @@ import { ValidationPipe } from '@nestjs/common'
 import { AppModule } from './app.module'
 
 async function main() {
+  process.env.APP_STARTED_AT = String(Date.now())
   const app = await NestFactory.create(AppModule)
-  app.setGlobalPrefix('api/v1')
+  const prefix = 'api/v1'
+  app.setGlobalPrefix(prefix)
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
@@ -20,24 +22,11 @@ async function main() {
     credentials: false
   })
   const port = process.env.PORT || 8080
-  const appName = process.env.APP_NAME || 'Timi API'
+  const appName = process.env.APP_NAME || 'Project Nest API'
   await app.listen(port)
 
-  // Poomeranio kawaii saludando
-  console.log(
-    `\n` +
-      '  ／＞　 フ\n' +
-      ' |       |\n' +
-      '／　　ミ  ＿＿\n' +
-      '|　　(●) (●)\n' +
-      '|　　　　● |\n' +
-      '\\　　　　ノ\n' +
-      '　＼＿＿＿／\n' +
-      '     U   U\n' +
-      'Hola, soy Timi! 🐶\n'
-  )
-  console.log(`El servidor está corriendo en el puerto: ${port}`)
-
-  console.log(`Nombre de la app: ${appName}`)
+  console.log(`Nest API : ${appName}`)
+  console.log(`App started at: ${process.env.APP_STARTED_AT}`)
+  console.log(`api it's runnung on: http://localhost:${port}/${prefix}`)
 }
 main()
