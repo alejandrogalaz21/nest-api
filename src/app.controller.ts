@@ -10,10 +10,8 @@ import {
 } from '@nestjs/common'
 
 import { ConfigService } from '@nestjs/config'
-import { WhatsAppService } from '@/modules/whatsapp/whatsapp.service'
-import { WhatsAppRequestDto } from '@/modules/whatsapp/dto/whatsapp-request.dto'
 import { DynamoDBHealthService } from '@/databases/dynamodb/dynamodb-health.service'
-import { PgHealthService } from './databases/postgres/pg-health.service'
+import { PgHealthService } from '@/databases/postgres/pg-health.service'
 import { performance } from 'perf_hooks' // used to measure event loop delay in milliseconds
 import * as os from 'os'
 
@@ -21,7 +19,6 @@ import * as os from 'os'
 export class AppController {
   constructor(
     private configService: ConfigService,
-    private whatsApp: WhatsAppService,
     private dynamoHealth: DynamoDBHealthService,
     private pgHealth: PgHealthService
   ) {}
@@ -104,21 +101,6 @@ export class AppController {
       resources,
       dynamodb: { ddbHealth, latencyMs: ddbLatencyMs },
       postgres: { pgHealth, latencyMs: pgLatencyMs, stats: pgStats }
-    }
-  }
-
-  @Post('webhook')
-  async handleMessage(@Body() whatsApp: WhatsAppRequestDto) {
-    try {
-      console.log('/webhook WhatsApp Message Received :', whatsApp)
-      const responseMessage = await this.whatsApp.handleMessage(
-        whatsApp.Body,
-        whatsApp.From,
-        whatsApp.To
-      )
-      return { message: responseMessage }
-    } catch (error) {
-      return { message: 'No response generated' }
     }
   }
 }

@@ -23,7 +23,10 @@ import { DynamoDBHealthService } from './dynamodb-health.service'
         })
 
         return DynamoDBDocumentClient.from(client, {
-          marshallOptions: { removeUndefinedValues: true }
+          marshallOptions: {
+            removeUndefinedValues: true,
+            convertClassInstanceToMap: true
+          }
         })
       },
       inject: [ConfigService]

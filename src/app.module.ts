@@ -11,11 +11,13 @@ import { UsersModule } from '@/modules/users/users.module'
 import { WhatsAppModule } from '@/modules/whatsapp/whatsapp.module'
 import { AuthModule } from '@/auth/auth.module'
 import { LoggerMiddleware } from '@/common/middleware/logger.middleware'
+import { OrdersModule } from '@/orders/orders.module'
 
 // controllers
 import { AppController } from '@/app.controller'
 import { AuthController } from '@/auth/auth.controller'
 import { UsersController } from '@/modules/users/users.controller'
+import { OrdersController } from '@/orders/orders.controller'
 
 @Module({
   imports: [
@@ -23,11 +25,17 @@ import { UsersController } from '@/modules/users/users.controller'
     PgModule,
     DynamoDbModule,
     UsersModule,
+    OrdersModule,
     WhatsAppModule,
     AuthModule,
     CommonModule
   ],
-  controllers: [AppController, AuthController, UsersController],
+  controllers: [
+    AppController,
+    AuthController,
+    UsersController,
+    OrdersController
+  ],
   providers: [],
   exports: []
 })
