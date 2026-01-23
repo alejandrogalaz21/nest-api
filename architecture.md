@@ -52,10 +52,6 @@ src/
 │   ├── seed/
 │   └── prisma/ | typeorm/
 │
-├── health/                 # Technical endpoints
-│   ├── health.controller.ts
-│   └── health.module.ts
-│
 └── shared/                 # (optional) shared modules
     ├── logger/
     └── mail/
@@ -136,12 +132,16 @@ src/
 │   │   ├── orders.repository.ts
 │   │   └── orders.module.ts
 │   │
-│   └── products/           # Product catalog
-│       ├── dto/
-│       ├── entities/
-│       ├── products.controller.ts
-│       ├── products.service.ts
-│       └── products.module.ts
+│   ├── products/           # Product catalog
+│   │   ├── dto/
+│   │   ├── entities/
+│   │   ├── products.controller.ts
+│   │   ├── products.service.ts
+│   │   └── products.module.ts
+│   │
+│   └── health/             # Health check endpoints
+│       ├── health.controller.ts
+│       └── health.module.ts
 
 ├── database/               # Persistence layer
 │   ├── dynamodb/
@@ -156,10 +156,6 @@ src/
 │       ├── seed.controller.ts
 │       ├── seed.service.ts
 │       └── seed.module.ts
-
-├── health/                 # Health check endpoints
-│   ├── health.controller.ts
-│   └── health.module.ts
 
 └── shared/                 # Shared third-party integrations
     ├── google/

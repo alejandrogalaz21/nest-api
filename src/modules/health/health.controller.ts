@@ -1,4 +1,4 @@
-// src/health/health.controller.ts
+// src/modules/health/health.controller.ts
 import { Controller, Get } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { DynamoDBHealthService } from '@/database/dynamodb/dynamodb-health.service'

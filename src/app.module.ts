@@ -17,8 +17,7 @@ import { ProductsModule } from '@/modules/products/products.module'
 // Shared Services
 import { WhatsAppModule } from '@/shared/whatsapp/whatsapp.module'
 import { OpenAIModule } from '@/shared/openai/openai.module'
-// Health Module
-import { HealthModule } from '@/health/health.module'
+import { HealthModule } from '@/modules/health/health.module'
 
 @Module({
   imports: [
