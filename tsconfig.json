@@ -19,12 +19,12 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*", "./dist/*", ""],
-      "@/auth/*": ["src/auth/*"],
       "@/common/*": ["src/common/*"],
       "@/config/*": ["src/config/*"],
-      "@/databases/*": ["src/databases/*"],
+      "@/database/*": ["src/database/*"],
       "@/modules/*": ["src/modules/*"],
-      "@/seed/*": ["src/seed/*"]
+      "@/shared/*": ["src/shared/*"],
+      "@/health/*": ["src/health/*"]
     }
   }
 }

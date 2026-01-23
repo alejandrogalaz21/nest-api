@@ -1,41 +1,40 @@
 // src/app.module.ts
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-// Config's
+// Config
 import { PgConfig, AppConfig } from '@/config'
-// modules
-import { PgModule } from '@/databases/postgres/pg.module'
-import { DynamoDbModule } from '@/databases/dynamodb/dynamodb.module'
+// Database
+import { PgModule } from '@/database/postgres/pg.module'
+import { DynamoDbModule } from '@/database/dynamodb/dynamodb.module'
+// Common
 import { CommonModule } from '@/common/common.module'
-import { UsersModule } from '@/modules/users/users.module'
-import { WhatsAppModule } from '@/modules/whatsapp/whatsapp.module'
-import { AuthModule } from '@/auth/auth.module'
 import { LoggerMiddleware } from '@/common/middleware/logger.middleware'
-import { OrdersModule } from '@/orders/orders.module'
-
-// controllers
-import { AppController } from '@/app.controller'
-import { AuthController } from '@/auth/auth.controller'
-import { UsersController } from '@/modules/users/users.controller'
-import { OrdersController } from '@/orders/orders.controller'
+// Business Modules
+import { UsersModule } from '@/modules/users/users.module'
+import { AuthModule } from '@/modules/auth/auth.module'
+import { OrdersModule } from '@/modules/orders/orders.module'
+import { ProductsModule } from '@/modules/products/products.module'
+// Shared Services
+import { WhatsAppModule } from '@/shared/whatsapp/whatsapp.module'
+import { OpenAIModule } from '@/shared/openai/openai.module'
+// Health Module
+import { HealthModule } from '@/health/health.module'
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [AppConfig, PgConfig] }),
     PgModule,
     DynamoDbModule,
+    CommonModule,
     UsersModule,
     OrdersModule,
-    WhatsAppModule,
+    ProductsModule,
     AuthModule,
-    CommonModule
+    WhatsAppModule,
+    OpenAIModule,
+    HealthModule
   ],
-  controllers: [
-    AppController,
-    AuthController,
-    UsersController,
-    OrdersController
-  ],
+  controllers: [],
   providers: [],
   exports: []
 })
