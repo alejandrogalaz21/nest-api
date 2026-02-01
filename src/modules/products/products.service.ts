@@ -11,6 +11,8 @@ import { Repository } from 'typeorm'
 import { CreateProductDto } from './dto/create-product.dto'
 import { UpdateProductDto } from './dto/update-product.dto'
 import { PaginationDTO } from '@/common/dto/pagination.dto'
+import { PaginationHelper } from '@/common/pagination/pagination.helper'
+import { PaginationResponseBuilder } from '@/common/pagination/pagination-response.builder'
 
 import { Product } from './entities/product.entity'
 import { validate as isUUID } from 'uuid'
@@ -21,7 +23,8 @@ export class ProductsService {
 
   constructor(
     @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>
+    private readonly productRepository: Repository<Product>,
+    private readonly paginationBuilder: PaginationResponseBuilder<Product>
   ) {}
 
   async create(createProductDto: CreateProductDto) {
@@ -34,13 +37,16 @@ export class ProductsService {
     }
   }
 
-  findAll(paginationDto: PaginationDTO) {
-    // const { limit = 10, offset = 0 } = paginationDto
-    // return this.productRepository.find({
-    //   take: limit,
-    //   skip: offset
-    //   // TODO: relaciones
-    // })
+  async findAll(paginationDto: PaginationDTO) {
+    const { page, limit, offset } = PaginationHelper.parse(paginationDto)
+
+    const [products, total] = await this.productRepository.findAndCount({
+      take: limit,
+      skip: offset
+      // TODO: relaciones
+    })
+
+    return this.paginationBuilder.build(products, total, page, limit)
   }
 
   async findOne(term: string) {

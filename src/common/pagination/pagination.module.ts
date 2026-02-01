@@ -7,3 +7,7 @@ import { PaginationResponseBuilder } from './pagination-response.builder'
   exports: [PaginationResponseBuilder]
 })
 export class PaginationModule {}
+
+// Export helper for easy access
+export { PaginationHelper } from './pagination.helper'
+export { PaginationResponse, PaginationMeta } from './pagination-response.interface'

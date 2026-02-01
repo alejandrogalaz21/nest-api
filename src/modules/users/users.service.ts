@@ -16,6 +16,7 @@ import * as bcrypt from 'bcryptjs'
 
 import { Logger } from '@nestjs/common'
 import { PaginationResponseBuilder } from 'src/common/pagination/pagination-response.builder'
+import { PaginationHelper } from 'src/common/pagination/pagination.helper'
 
 @Injectable()
 export class UsersService {
@@ -66,8 +67,8 @@ export class UsersService {
 
   async findAll(params?: PaginationUserDTO) {
     const {
-      page = '1',
-      limit = '10',
+      page,
+      limit,
       role,
       status,
       phone,
@@ -77,9 +78,11 @@ export class UsersService {
       orderDir = 'ASC'
     } = params || {}
 
-    const parsedPage = Number(page) || 1
-    const parsedLimit = Number(limit) || 10
-    const parsedOffset = (parsedPage - 1) * parsedLimit
+    const {
+      page: parsedPage,
+      limit: parsedLimit,
+      offset: parsedOffset
+    } = PaginationHelper.parse({ page, limit })
 
     const query = this.userRepository.createQueryBuilder('user')
 
@@ -118,23 +121,8 @@ export class UsersService {
     if (parsedOffset) query.skip(parsedOffset)
 
     const users = await query.getMany()
-    const data = users.map(user => instanceToPlain(user))
 
-    const lastPage = Math.ceil(total / parsedLimit) || 1
-    const from = total === 0 ? 0 : parsedOffset + 1
-    const to = total === 0 ? 0 : parsedOffset + users.length
-
-    return {
-      data,
-      pagination: {
-        total,
-        per_page: parsedLimit,
-        current_page: parsedPage,
-        last_page: lastPage,
-        from,
-        to
-      }
-    }
+    return this.paginationBuilder.build(users, total, parsedPage, parsedLimit)
   }
 
   async findOne(id: string) {
