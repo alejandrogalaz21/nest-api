@@ -14,6 +14,13 @@ import { UsersModule } from '@/modules/users/users.module'
 import { AuthModule } from '@/modules/auth/auth.module'
 import { OrdersModule } from '@/modules/orders/orders.module'
 import { ProductsModule } from '@/modules/products/products.module'
+import { ClientsModule } from '@/modules/clients/clients.module'
+import { CredentialsModule } from '@/modules/credentials/credentials.module'
+import { TaxProfilesModule } from '@/modules/tax-profiles/tax-profiles.module'
+import { TaxAddressesModule } from '@/modules/tax-addresses/tax-addresses.module'
+import { TaxRegimesModule } from '@/modules/tax-regimes/tax-regimes.module'
+import { TaxActivitiesModule } from '@/modules/tax-activities/tax-activities.module'
+import { TaxObligationsModule } from '@/modules/tax-obligations/tax-obligations.module'
 // Shared Services
 import { WhatsAppModule } from '@/shared/whatsapp/whatsapp.module'
 import { OpenAIModule } from '@/shared/openai/openai.module'
@@ -30,6 +37,13 @@ import { SatModule } from '@/modules/sat/sat.module'
     UsersModule,
     OrdersModule,
     ProductsModule,
+    ClientsModule,
+    CredentialsModule,
+    TaxProfilesModule,
+    TaxAddressesModule,
+    TaxRegimesModule,
+    TaxActivitiesModule,
+    TaxObligationsModule,
     AuthModule,
     WhatsAppModule,
     OpenAIModule,
