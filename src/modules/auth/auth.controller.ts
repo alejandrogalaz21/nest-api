@@ -8,10 +8,12 @@ import {
   Req
 } from '@nestjs/common'
 import { AuthGuard } from '@nestjs/passport'
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger'
 import { AuthService } from './auth.service'
 import { UsersService } from '../users/users.service'
 import { CreateUserDto } from '../users/dto/create-user.dto'
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -36,6 +38,7 @@ export class AuthController {
   // GET endpoint to return the logged-in user's information
   @Get('me')
   // Protects the route using NestJS AuthGuard for JWT authentication
+  @ApiBearerAuth('jwt')
   @UseGuards(AuthGuard('jwt'))
   async getProfile(@Req() req) {
     // req.user is populated by JwtStrategy.validate with userId and email

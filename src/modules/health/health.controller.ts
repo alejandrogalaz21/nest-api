@@ -1,11 +1,13 @@
 // src/modules/health/health.controller.ts
 import { Controller, Get } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
+import { ApiExcludeEndpoint, ApiTags } from '@nestjs/swagger'
 import { DynamoDBHealthService } from '@/database/dynamodb/dynamodb-health.service'
 import { PgHealthService } from '@/database/postgres/pg-health.service'
 import { performance } from 'perf_hooks'
 import * as os from 'os'
 
+@ApiTags('health')
 @Controller()
 export class HealthController {
   constructor(
@@ -14,6 +16,7 @@ export class HealthController {
     private pgHealth: PgHealthService
   ) {}
 
+  @ApiExcludeEndpoint()
   @Get('/')
   root() {
     return {
