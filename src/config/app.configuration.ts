@@ -37,5 +37,11 @@ export default registerAs('app', () => ({
   redis: {
     host: process.env.REDIS_HOST || 'localhost',
     port: parseInt(process.env.REDIS_PORT) || 6379
+  },
+  sat: {
+    cerPath: process.env.SAT_CER_PATH,
+    keyPath: process.env.SAT_KEY_PATH,
+    outputDir: process.env.SAT_OUTPUT_DIR || 'downloads',
+    pollIntervalMs: parseInt(process.env.SAT_POLL_INTERVAL_MS) || 60000
   }
 }))

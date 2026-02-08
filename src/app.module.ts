@@ -18,6 +18,8 @@ import { ProductsModule } from '@/modules/products/products.module'
 import { WhatsAppModule } from '@/shared/whatsapp/whatsapp.module'
 import { OpenAIModule } from '@/shared/openai/openai.module'
 import { HealthModule } from '@/modules/health/health.module'
+import { SatDownloadModule } from '@/shared/sat/sat-download.module'
+import { SatModule } from '@/modules/sat/sat.module'
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { HealthModule } from '@/modules/health/health.module'
     AuthModule,
     WhatsAppModule,
     OpenAIModule,
+    SatDownloadModule,
+    SatModule,
     HealthModule
   ],
   controllers: [],
